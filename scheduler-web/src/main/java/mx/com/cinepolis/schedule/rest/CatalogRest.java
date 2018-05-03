@@ -1,16 +1,13 @@
 package mx.com.cinepolis.schedule.rest;
 
-import mx.com.cinepolis.scheduler.commons.to.CatalogsTO;
-import mx.com.cinepolis.scheduler.commons.to.UserTO;
+import com.sun.jndi.toolkit.url.Uri;
+import mx.com.cinepolis.scheduler.commons.to.*;
 import mx.com.cinepolis.scheduler.facade.CatalogFacadeEJB;
+import mx.com.cinepolis.scheduler.facade.GithubFacadeEJB;
 
 import javax.ejb.EJB;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 import java.util.List;
 
 /**
@@ -21,6 +18,8 @@ public class CatalogRest {
 
     @EJB
     private CatalogFacadeEJB catalogFacadeEJB;
+    @EJB
+    private GithubFacadeEJB githubFacadeEJB;
 
     @GET
     @Produces("application/json")
@@ -33,11 +32,63 @@ public class CatalogRest {
 
     @GET
     @Produces("application/json")
+    @Path("/userGit/{user}")
+    public Response getUserGit(@PathParam("user") String user){
+        GithubUserTO githubUserTO = githubFacadeEJB.getUserGit(user);
+        return Response.ok().entity(githubUserTO).build();
+    }
+
+
+    @GET
+    @Produces("application/json")
+    @Path("/country")
+    public Response getEstadosQuery(@Context UriInfo uri){
+
+        MultivaluedMap<String,String> queryParams = uri.getQueryParameters();
+        String pais = queryParams.getFirst("pais");
+
+        List<CatalogsTO> catalogsTOList = catalogFacadeEJB.getEstados(pais);
+        GenericEntity<List<CatalogsTO>> entity = new GenericEntity<List<CatalogsTO>>(catalogsTOList){};
+        return Response.ok().entity(entity).build();
+    }
+
+    @GET
+    @Produces("application/json")
+    @Path("/login")
+    public Response getValidateUser(@Context UriInfo uri){
+        MultivaluedMap<String,String> queryParams = uri.getQueryParameters();
+        String user = queryParams.getFirst("user");
+        String pass = queryParams.getFirst("pass");
+        GithubUserTO githubUserTO = catalogFacadeEJB.validateUser(user,pass);
+        return Response.ok().entity(githubUserTO).build();
+    }
+
+
+    @GET
+    @Produces("application/json")
     @Path("/country/{pais}")
     public Response getEstados(@PathParam("pais") String pais){
         List<CatalogsTO> catalogsTOList = catalogFacadeEJB.getEstados(pais);
         GenericEntity<List<CatalogsTO>> entity = new GenericEntity<List<CatalogsTO>>(catalogsTOList){};
         return Response.ok().entity(entity).build();
     }
+
+    @GET
+    @Produces("application/json")
+    @Path("/game/{tipo}")
+    public Response getVideoJuegos(@PathParam("tipo") String tipo){
+        List<CalotogVideoJuegos> calotogVideoJuegosList = catalogFacadeEJB.getCalotogVideoJuegos(tipo);
+        GenericEntity<List<CalotogVideoJuegos>> entity = new GenericEntity<List<CalotogVideoJuegos>>(calotogVideoJuegosList){};
+        return Response.ok().entity(entity).build();
+    }
+
+    @POST
+    @Produces("application/json")
+    @Path("/alta")
+    public Response getAddUser(FormularioTO formularioTO){
+        FormularioTO formularioTO1 = catalogFacadeEJB.getAddUser(formularioTO);
+        return Response.ok().entity(formularioTO1).build();
+    }
+
 
 }

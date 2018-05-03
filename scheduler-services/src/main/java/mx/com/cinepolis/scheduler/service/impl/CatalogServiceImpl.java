@@ -1,13 +1,13 @@
 package mx.com.cinepolis.scheduler.service.impl;
 
-import mx.com.cinepolis.scheduler.commons.to.CatalogsTO;
-import mx.com.cinepolis.scheduler.commons.to.UserTO;
+import mx.com.cinepolis.scheduler.commons.to.*;
 import mx.com.cinepolis.scheduler.service.CatalogService;
+import mx.com.cinepolis.scheduler.service.GithubService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CatalogServiceImpl implements CatalogService{
+public class CatalogServiceImpl implements CatalogService {
 
     /**
      * {@inheritDoc}
@@ -54,4 +54,40 @@ public class CatalogServiceImpl implements CatalogService{
         }
         return catalogsTOList;
     }
+
+    @Override
+    public List<CalotogVideoJuegos> getVideojuegos(String tipo) {
+        List<CalotogVideoJuegos> calotogVideoJuegosList = new ArrayList<>();
+        if (tipo.equals("Action")){
+            calotogVideoJuegosList.add(new CalotogVideoJuegos(){{
+                setId(1);
+                setVideojuego("Call of Duty");
+            }});
+            calotogVideoJuegosList.add(new CalotogVideoJuegos(){{
+                setId(2);
+                setVideojuego("Fallout");
+            }});
+        }
+        return calotogVideoJuegosList;
+    }
+
+    @Override
+    public GithubUserTO validateUser(String user, String password) {
+        GithubUserTO githubUserTO = new GithubUserTO();
+        if(user.equals("Urbano") && password.equals("axity")){
+            githubUserTO.setName("Urbano");
+            githubUserTO.setLogin("UrbanRude");
+            githubUserTO.setAvatar_url("https://www.google.com.mx/imgres?imgurl=https%3A%2F%2");
+            githubUserTO.setFollowers(10);
+            githubUserTO.setFollowing(12);
+            githubUserTO.setValidate(true);
+        }
+        return githubUserTO;
+    }
+
+    @Override
+    public FormularioTO addUser(FormularioTO formularioTO) {
+        return formularioTO;
+    }
+
 }

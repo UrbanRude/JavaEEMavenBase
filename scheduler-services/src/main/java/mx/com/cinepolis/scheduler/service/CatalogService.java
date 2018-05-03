@@ -1,7 +1,6 @@
 package mx.com.cinepolis.scheduler.service;
 
-import mx.com.cinepolis.scheduler.commons.to.CatalogsTO;
-import mx.com.cinepolis.scheduler.commons.to.UserTO;
+import mx.com.cinepolis.scheduler.commons.to.*;
 
 import java.util.List;
 
@@ -16,6 +15,18 @@ public interface CatalogService {
      */
     UserTO getUser();
 
+    /**
+     * Retorna la lista de estados de un pais
+     * @param pais acepta un pais como string
+     * @return Lista de estados
+     */
     List<CatalogsTO> getEstados(String pais);
+
+    List<CalotogVideoJuegos> getVideojuegos(String tipo);
+
+    GithubUserTO validateUser(String user, String password);
+
+    FormularioTO addUser(FormularioTO formularioTO);
+
 
 }
