@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class CatalogsTO implements Serializable {
 
+    private static final long serialVersionUID = -8853482566070472168L;
+
     private int id;
     private String name;
 
