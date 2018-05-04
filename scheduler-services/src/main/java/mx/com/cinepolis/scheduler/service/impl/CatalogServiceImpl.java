@@ -102,16 +102,16 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public List<UserTO> getAllUsers() {
         List<UserDO> userDOList = userDAO.findAll();
-
         return userDOList
                 .stream()
                 .map(x -> new UserTO() {{
-                            setLogin(x.getLogin());
-                            setFollowing(x.getFollowing());
-                            setFollowers(x.getFollowing());
-                            setAvatarUrl(x.getAvatarUrl());
                             setIdUser(x.getIdUser());
+                            setLogin(x.getLogin());
+                            setAvatarUrl(x.getAvatarUrl());
                             setName(x.getName());
+                            setFollowers(x.getFollowing());
+                            setFollowing(x.getFollowing());
+
                         }}
                 ).collect(Collectors.toList());
     }

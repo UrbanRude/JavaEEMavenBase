@@ -1,11 +1,14 @@
 package mx.com.arquitectura.base.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "CH_USER")
-public class UserDO {
+public class UserDO implements Serializable {
+
+    private static final long serialVersionUID = -8853482566070472162L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

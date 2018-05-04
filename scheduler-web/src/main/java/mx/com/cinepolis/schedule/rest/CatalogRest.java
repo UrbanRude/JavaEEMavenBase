@@ -99,6 +99,4 @@ public class CatalogRest {
         return Response.ok().entity(entity).build();
     }
 
-
-
 }
