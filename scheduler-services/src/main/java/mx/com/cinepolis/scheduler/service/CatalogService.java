@@ -28,5 +28,11 @@ public interface CatalogService {
 
     FormularioTO addUser(FormularioTO formularioTO);
 
+    /**
+     * Retorna la lista de los usuarios de la bd
+     * @return Lista de usuarios
+     */
+
+    List<UserTO>  getAllUsers();
 
 }

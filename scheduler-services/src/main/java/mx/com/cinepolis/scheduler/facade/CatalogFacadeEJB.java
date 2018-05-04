@@ -27,4 +27,6 @@ public class CatalogFacadeEJB {
     public GithubUserTO validateUser(String user, String password){ return  catalogService.validateUser(user,password);}
 
     public FormularioTO getAddUser(FormularioTO formularioTO){return catalogService.addUser(formularioTO);}
+
+    public List<UserTO> getAllUsers(){ return catalogService.getAllUsers();}
 }

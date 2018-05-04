@@ -90,5 +90,15 @@ public class CatalogRest {
         return Response.ok().entity(formularioTO1).build();
     }
 
+    @GET
+    @Produces("application/json")
+    @Path("/users")
+    public Response getAllUser(){
+        List<UserTO> userTOList = catalogFacadeEJB.getAllUsers();
+        GenericEntity<List<UserTO>> entity = new GenericEntity<List<UserTO>>(userTOList){};
+        return Response.ok().entity(entity).build();
+    }
+
+
 
 }
