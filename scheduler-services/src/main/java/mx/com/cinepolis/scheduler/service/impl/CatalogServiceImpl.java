@@ -116,5 +116,32 @@ public class CatalogServiceImpl implements CatalogService {
                 ).collect(Collectors.toList());
     }
 
+    @Override
+    public ValidateTO getAltaUser(UserTO userTO) {
+        UserDO userDO = new UserDO();
+        userDO.setIdUser(userTO.getIdUser());
+        userDO.setLogin(userTO.getLogin());
+        userDO.setAvatarUrl(userTO.getAvatarUrl());
+        userDO.setName(userTO.getName());
+        userDO.setFollowing(userTO.getFollowing());
+        userDO.setFollowers(userTO.getFollowers());
+        userDAO.create(userDO);
+        ValidateTO validateTO = new ValidateTO();
+        return validateTO;
+    }
+
+    @Override
+    public UserTO getUserParticular(long idUser) {
+        UserDO userDo = userDAO.getById(idUser);
+        UserTO userTO1 = new UserTO();
+        userTO1.setLogin(userDo.getLogin());
+        userTO1.setName(userDo.getName());
+        userTO1.setAvatarUrl(userDo.getAvatarUrl());
+        userTO1.setIdUser(userDo.getIdUser());
+        userTO1.setFollowers(userDo.getFollowing());
+        userTO1.setFollowing(userDo.getFollowing());
+        return userTO1;
+    }
+
 
 }

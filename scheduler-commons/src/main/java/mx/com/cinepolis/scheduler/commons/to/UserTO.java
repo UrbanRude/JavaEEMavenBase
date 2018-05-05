@@ -11,7 +11,7 @@ public class UserTO implements Serializable {
 
     private static final long serialVersionUID = -8853482566070472169L;
 
-    private Long idUser;
+    private long idUser;
 
     private String login;
 
@@ -27,7 +27,7 @@ public class UserTO implements Serializable {
         return serialVersionUID;
     }
 
-    public Long getIdUser() {
+    public long getIdUser() {
         return idUser;
     }
 

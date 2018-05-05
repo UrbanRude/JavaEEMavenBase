@@ -1,6 +1,7 @@
 package mx.com.cinepolis.schedule.rest;
 
 import com.sun.jndi.toolkit.url.Uri;
+import mx.com.arquitectura.base.model.UserDO;
 import mx.com.cinepolis.scheduler.commons.to.*;
 import mx.com.cinepolis.scheduler.facade.CatalogFacadeEJB;
 import mx.com.cinepolis.scheduler.facade.GithubFacadeEJB;
@@ -18,6 +19,7 @@ public class CatalogRest {
 
     @EJB
     private CatalogFacadeEJB catalogFacadeEJB;
+
     @EJB
     private GithubFacadeEJB githubFacadeEJB;
 
@@ -82,6 +84,14 @@ public class CatalogRest {
         return Response.ok().entity(entity).build();
     }
 
+    @GET
+    @Produces("application/json")
+    @Path("/search/{user}")
+    public Response getUserById(@PathParam("user") long idUser){
+        UserTO userTO = catalogFacadeEJB.getUserById(idUser);
+        return Response.ok().entity(userTO).build();
+    }
+
     @POST
     @Produces("application/json")
     @Path("/alta")
@@ -97,6 +107,14 @@ public class CatalogRest {
         List<UserTO> userTOList = catalogFacadeEJB.getAllUsers();
         GenericEntity<List<UserTO>> entity = new GenericEntity<List<UserTO>>(userTOList){};
         return Response.ok().entity(entity).build();
+    }
+
+    @POST
+    @Produces("application/json")
+    @Path("/create")
+    public Response getAddUserPost(UserTO userTO){
+        ValidateTO validateTO = catalogFacadeEJB.getAltaUser(userTO);
+        return Response.ok().entity(validateTO).build();
     }
 
 }

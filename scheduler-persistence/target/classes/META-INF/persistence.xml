@@ -5,6 +5,7 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <jta-data-source>jdbc/scheduleDS</jta-data-source>
 
+
         <class>mx.com.arquitectura.base.model.UserDO</class>
 
         <properties>

@@ -1,5 +1,6 @@
 package mx.com.cinepolis.scheduler.service;
 
+import mx.com.arquitectura.base.model.UserDO;
 import mx.com.cinepolis.scheduler.commons.to.*;
 
 import java.util.List;
@@ -34,5 +35,7 @@ public interface CatalogService {
      */
 
     List<UserTO>  getAllUsers();
+    ValidateTO getAltaUser(UserTO userTO);
+    UserTO getUserParticular(long idUser);
 
 }

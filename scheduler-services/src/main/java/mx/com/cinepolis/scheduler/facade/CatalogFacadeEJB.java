@@ -1,5 +1,6 @@
 package mx.com.cinepolis.scheduler.facade;
 
+import mx.com.arquitectura.base.model.UserDO;
 import mx.com.cinepolis.scheduler.commons.to.*;
 import mx.com.cinepolis.scheduler.service.CatalogService;
 
@@ -29,4 +30,8 @@ public class CatalogFacadeEJB {
     public FormularioTO getAddUser(FormularioTO formularioTO){return catalogService.addUser(formularioTO);}
 
     public List<UserTO> getAllUsers(){ return catalogService.getAllUsers();}
+
+    public ValidateTO getAltaUser(UserTO userTO){return catalogService.getAltaUser(userTO);}
+
+    public UserTO getUserById(long idUser){return catalogService.getUserParticular(idUser);}
 }
